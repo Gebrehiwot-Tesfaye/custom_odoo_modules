@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <record id="ir_cron_check_project_end_dates" model="ir.cron">
+            <field name="name">Check Project End Dates</field>
+            <!-- Ensure the model_id points to the correct model -->
+            <field name="model_id" ref="model_agent_project"/>
+            <field name="state">code</field>
+            <field name="code">model.check_project_end_dates()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+    </data>
+</odoo>
