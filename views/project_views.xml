@@ -7,11 +7,14 @@
             <tree>
                 <field name="name"/>
                 <field name="description"/>
-                <field name="start_date"/>
-                <field name="end_date"/>
+                <field name="agent_ids" string="Agents"/> <!-- Display the count of agents -->
+                 <field name="start_date" widget="date"/>
+                <field name="end_date" widget="date"/>
+
             </tree>
         </field>
     </record>
+
 
    <record id="view_project_form" model="ir.ui.view">
     <field name="name">agent.project.form</field>
@@ -55,24 +58,46 @@
     </field>
 </record>
 
-     <!-- Kanban view for Projects -->
-    <record id="view_project_kanban" model="ir.ui.view">
-        <field name="name">agent.project.kanban</field>
-        <field name="model">agent.project</field>
-        <field name="arch" type="xml">
-            <kanban>
-                <field name="name"/>
-                <field name="description"/>
-                <field name="start_date"/>
-                <field name="end_date"/>
-            </kanban>
-        </field>
-    </record>
+ <record id="view_project_kanban" model="ir.ui.view">
+    <field name="name">agent.project.kanban</field>
+    <field name="model">agent.project</field>
+    <field name="arch" type="xml">
+        <kanban class="o_kanban_small_column">
+            <field name="name"/>
+            <field name="description"/>
+            <field name="start_date"/>
+            <field name="end_date"/>
+
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click">
+                        <div class="o_kanban_record">
+                            <div class="o_kanban_primary_upper">
+                                <strong><field name="name"/></strong>
+                            </div>
+                            <div>
+                                <span><b>Description:</b> <field name="description"/></span>
+                            </div>
+                            <div>
+                                <span><b>Start Date:</b> <field name="start_date"/></span>
+                            </div>
+                            <div>
+                                <span><b>End Date:</b> <field name="end_date"/></span>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+
     <!-- Action for Projects -->
     <record id="action_project" model="ir.actions.act_window">
         <field name="name">Projects</field>
         <field name="res_model">agent.project</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
          <!-- Order by created date in descending order -->
     <field name="context">{'search_default_order': 'create_date desc'}</field>
         <field name="view_id" ref="view_project_tree"/>

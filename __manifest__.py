@@ -14,7 +14,22 @@
          'views/hr_employee_contract_views.xml',
         'data/email_templates.xml',  # Include the email templates
         'data/cron_jobs.xml',
+        'views/assets.xml',
     ],
+
+'assets': {
+        'web.assets_frontend': [
+            'edomias_agent/static/src/css/custom_styles.css',
+
+        ],
+    'web.assets_backend': [
+        'edomias_agent/static/src/css/custom_styles.css'
+      'edomias_agent/static/src/js/project_date_restriction.js',
+
+
+    ],
+    },
     'installable': True,
     'application': True,
+   'images': 'static/description/icon.png',
 }
