@@ -1,8 +1,9 @@
 import logging
 
+from odoo.exceptions import ValidationError
 from odoo import models, fields, api
 
-from datetime import timedelta
+from datetime import timedelta, date
 
 _logger = logging.getLogger(__name__)
 class EdomiasProject(models.Model):
@@ -22,6 +23,29 @@ class EdomiasProject(models.Model):
 
     # One2many relation to hold Edomias agents
     agent_ids = fields.One2many('edomias.agent', 'project_id', string='Agents', copy=False)
+
+    @api.constrains('name', 'start_date', 'end_date')
+    def _check_unique_name_and_dates(self):
+        today = date.today()
+
+        for record in self:
+            # Check for unique project name
+            project_with_same_name = self.search([('name', '=', record.name), ('id', '!=', record.id)])
+            if project_with_same_name:
+                raise ValidationError('The project name must be unique. Please choose a different name.')
+
+            # Check if the start date is in the past
+            if record.start_date and record.start_date < today:
+                raise ValidationError("The start date cannot be in the past. Please select a valid date.")
+
+            # Check if the end date is in the past
+            if record.end_date and record.end_date < today:
+                raise ValidationError("The end date cannot be in the past. Please select a valid end date.")
+
+            # Check if the end date is before the start date
+            if record.end_date and record.start_date and record.end_date < record.start_date:
+                raise ValidationError(
+                    "The end date cannot be earlier than the start date. Please select a valid end date.")
 
     @api.onchange('location_ids', 'position_ids')
     def _onchange_location_position(self):
@@ -55,25 +79,24 @@ class EdomiasProject(models.Model):
         return project
 
     def send_project_creation_email(self, project):
-        """Send notification email to Managing Director, HR Manager, Finance Manager, etc."""
-        # Logic to select email recipients based on user roles or groups
-        managing_director = self.env.ref('base.user_admin')  # Example reference for admin user
-        hr_manager_group = self.env.ref('hr.group_hr_manager')
-        hr_managers = self.env['res.users'].search([('groups_id', 'in', hr_manager_group.id)])
+        """Send notification email when a project is created."""
+        try:
+            # Reference the correct email template
+            template = self.env.ref('edomias_agent.email_template_project_created')
+            _logger.info('Sending email for project: %s', project.name)
 
-        # Find all email recipients
-        recipients = managing_director | hr_managers  # Combine with other user groups as needed
-
-        # Send email
-        template_id = self.env.ref('custom_module.email_template_project_created').id  # Reference the email template
-        template = self.env['mail.template'].browse(template_id)
-        for recipient in recipients:
-            template.email_to = recipient.email
+            # Send email using the template
             template.send_mail(project.id, force_send=True)
+
+            # Log the email sending action
+            _logger.info('Email successfully sent for project: %s', project.name)
+
+        except Exception as e:
+            _logger.error('Error sending email: %s', e)
 
     @api.model
     def check_project_end_dates(self):
-        """Check for projects whose end dates are approaching and send notifications."""
+        """Check for projects nearing their end date and send notifications."""
         today = fields.Date.today()
         upcoming_projects = self.search([('end_date', '<=', today + timedelta(days=30))])
 
@@ -81,31 +104,10 @@ class EdomiasProject(models.Model):
             self.send_end_date_notification(project)
 
     def send_end_date_notification(self, project):
-        """Send email to notify about project approaching its end date."""
-        # Logic to send emails to relevant users
-        operation_head = self.env['res.users'].search([('role', '=', 'operation_head')])  # Example
-        managing_director = self.env.ref('base.user_admin')  # Example for admin user
-
-        # Combine all recipients and send the email
-        recipients = operation_head | managing_director  # Add others like HR, Finance if needed
-        template_id = self.env.ref('custom_module.email_template_contract_ending').id  # End date email template
-        template = self.env['mail.template'].browse(template_id)
-        for recipient in recipients:
-            template.email_to = recipient.email
-            template.send_mail(project.id, force_send=True)
-
-    @api.model
-    def send_project_creation_email(self, project):
+        """Send email to notify about project nearing its end date."""
         try:
-            template = self.env.ref('edomias_agent.email_template_project_created')
-            _logger.info('Sending email for project: %s', project.name)
-            _logger.info('Email template subject: %s', template.subject)
-            # Send email using the template
+            template = self.env.ref('edomias_agent.email_template_contract_ending')
             template.send_mail(project.id, force_send=True)
+            _logger.info('End date notification sent for project: %s', project.name)
         except Exception as e:
-            _logger.error('Error sending email: %s', e)
-
-    @api.model
-    def send_project_creation_email(self, project):
-        template = self.env.ref('edomias_agent.email_template_project_created')
-        template.send_mail(project.id, force_send=True)
+            _logger.error('Error sending end date email: %s', e)
