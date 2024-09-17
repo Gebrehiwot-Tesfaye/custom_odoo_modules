@@ -1,13 +1,22 @@
-<record id="view_hr_employee_form_inherit" model="ir.ui.view">
-    <field name="name">hr.employee.form.inherit</field>
-    <field name="model">hr.employee</field>
-    <field name="inherit_id" ref="hr.view_employee_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//group[@name='contact_information']" position="after">
-            <group>
-                <field name="edomias_project_id"/>
-                <field name="location_id"/>
-            </group>
-        </xpath>
-    </field>
-</record>
+<odoo>
+    <!-- Inherit the Employee Form View -->
+    <record id="view_hr_employee_form_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <!-- Add a new tab to the notebook -->
+            <xpath expr="//notebook" position="inside">
+                <page name="employee_contract" string="Employee Contract">
+                    <!-- Add fields to the new tab -->
+                    <group string="Contract Details">
+                        <field name="contract_date"/>
+                        <field name="allowance_rate"/>
+                        <field name="edomias_project_id"/>
+                        <field name="location_id"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

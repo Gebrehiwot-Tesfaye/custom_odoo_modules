@@ -1,6 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_client,access_client,model_my_module_client,,1,1,1,1
-access_project,access_project,model_my_module_project,,1,1,1,1
-access_payroll,access_payroll,model_my_module_payroll,,1,1,1,1
-access_purchase,access_purchase,model_my_module_purchase,,1,1,1,1
-access_sales_order,access_sales_order,model_my_module_sales_order,,1,1,1,1
+access_client,access_client,model_my_module_client,base.group_user,1,1,1,1
+access_project,access_project,model_my_module_project,base.group_user,1,1,1,1
+access_payroll,access_payroll,model_my_module_payroll,base.group_user,1,1,1,1
+access_purchase,access_purchase,model_my_module_purchase,base.group_user,1,1,1,1
+access_my_module_purchase_user,access_my_module_purchase_user,model_my_module_purchase,base.group_user,1,1,1,1
+access_sales_order,access_sales_order,model_my_module_sales_order,base.group_user,1,1,1,1
+access_employee_rate_user,access_employee_rate_user,model_my_module_employee_rate,base.group_user,1,0,0,0
+access_my_module_sales_service_manager,access_my_module_sales_service_manager,model_my_module_sales_service,base.group_system,1,1,1,1
+access_my_module_sales_service_user,access_my_module_sales_service_user,model_my_module_sales_service,base.group_user,1,1,1,1

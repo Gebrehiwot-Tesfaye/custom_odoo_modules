@@ -9,9 +9,41 @@
 *
 **********************************************************************************/
 
+/* Change primary colors to green */
 $o-brand-odoo: #243742;
-$o-brand-primary: #5D8DA8;
+$o-brand-primary: #5D8DA8;       /* Primary color (now green) */
 
-$mk-menu-color: #f8f9fa;
-$mk-appbar-color: #dee2e6;
-$mk-appbar-background: #000000;
+/* Sidebar customization */
+$mk-menu-color: #00FF00;          /* Sidebar text color (now green) */
+$mk-appbar-color: #088B1E;        /* Top bar text color (now green) */
+$mk-appbar-background: #088B1E;   /* Top bar background (still black) */
+
+/* Customize the body and backend colors */
+body {
+    background-color: #C3F4CC!important;   /* Body background color green */
+    color: #000000 !important;              /* Body text color black */
+}
+
+/* Additional sidebar customization if needed */
+.o_main_navbar {
+    background-color: #088B1E !important;   /* Navbar background color green */
+    color: #ffffff !important;              /* Navbar text color white */
+}
+
+.o_sub_menu {
+    background-color: #F1F2F7!important;   /* Submenu background color green */
+    color: #000000 !important;              /* Submenu text color white */
+}
+
+/* Button colors */
+.btn-primary {
+    background-color: #2ECE2E !important;   /* Primary button background color green */
+    border-color: #00FF00 !important;       /* Primary button border color green */
+    color: #ffffff !important;              /* Primary button text color white */
+}
+
+/* Top app bar customization */
+.o_control_panel {
+    background-color: #FFFFFF !important;   /* App bar background color green */
+    color: #000000 !important;              /* App bar text color white */
+}

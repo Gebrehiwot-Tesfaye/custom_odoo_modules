@@ -1,24 +1,20 @@
-# edomias_operation/__manifest__.py
-
 {
-    'name': 'Edomias_Operation_Management',
+    'name': 'Edomias Project Management',
     'version': '1.0',
-    'summary': 'Manage clients, projects, payroll, purchases, and sales for Edomias International',
+    'summary': 'Manage Edomias projects with client information, locations, and rates',
+    'description': """
+        This module helps manage Edomias projects, track employment rates, Edomias rates, and location-specific data.
+    """,
     'author': 'Your Name',
-    'category': 'Operations',
-    'depends': ['base', 'hr', 'purchase', 'sale_management', 'account'],
+    'depends': ['base', 'project', 'hr'],
     'data': [
         'security/ir.model.access.csv',
-        'views/client_views.xml',
-        'views/project_views.xml',
-        'views/payroll_views.xml',
-        'views/purchase_views.xml',
-        'views/sales_views.xml',
-        'views/menu_views.xml',
-        # 'data/email_templates.xml',
+        'views/edomias_menu.xml',
+        'views/edomias_project_views.xml',
+        'views/edomias_location_views.xml',
+        'views/hr_employee_views.xml',
 
-        'data/data.xml',
     ],
     'installable': True,
-    'application': False,
+    'application': True,
 }

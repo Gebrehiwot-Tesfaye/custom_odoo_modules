@@ -1,4 +1,5 @@
 <odoo>
+    <!-- Tree View -->
     <record id="view_edomias_project_tree" model="ir.ui.view">
         <field name="name">edomias.project.tree</field>
         <field name="model">edomias.project</field>
@@ -8,10 +9,13 @@
                 <field name="client_name"/>
                 <field name="start_date"/>
                 <field name="end_date"/>
+
             </tree>
         </field>
     </record>
 
+    <!-- Form View -->
+       <!-- Form View -->
     <record id="view_edomias_project_form" model="ir.ui.view">
         <field name="name">edomias.project.form</field>
         <field name="model">edomias.project</field>
@@ -32,6 +36,7 @@
                                     <field name="position"/>
                                     <field name="employment_rate"/>
                                     <field name="edomias_rate"/>
+                                    <field name="total_rate"/>
                                 </tree>
                             </field>
                         </page>
@@ -41,6 +46,8 @@
         </field>
     </record>
 
+
+    <!-- Kanban View -->
     <record id="view_edomias_project_kanban" model="ir.ui.view">
         <field name="name">edomias.project.kanban</field>
         <field name="model">edomias.project</field>
@@ -53,4 +60,22 @@
             </kanban>
         </field>
     </record>
+
+    <!-- Actions -->
+    <record id="action_edomias_project" model="ir.actions.act_window">
+        <field name="name">Edomias Projects</field>
+        <field name="res_model">edomias.project</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create and manage Edomias Projects
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_edomias_root" name="Edomias Project" sequence="1"/>
+
+    <menuitem id="menu_edomias_project" name="Projects" parent="menu_edomias_root" sequence="2" action="action_edomias_project"/>
 </odoo>

@@ -40,7 +40,22 @@
             </form>
         </field>
     </record>
+    <odoo>
+    <!-- Action to Open Project Views -->
+    <record id="action_project" model="ir.actions.act_window">
+        <field name="name">Projects</field>
+        <field name="res_model">my_module.project</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Project
+            </p>
+        </field>
+    </record>
+</odoo>
 
-    <menuitem id="menu_project_root" name="Projects" sequence="2"/>
-    <menuitem id="menu_project" name="Projects" parent="menu_project_root" action="action_project"/>
+
+<!--    <menuitem id="menu_project_root" name="Projects" sequence="2"/>-->
+<!--    <menuitem id="menu_project" name="Projects" parent="menu_project_root" action="action_project"/>-->
 </odoo>

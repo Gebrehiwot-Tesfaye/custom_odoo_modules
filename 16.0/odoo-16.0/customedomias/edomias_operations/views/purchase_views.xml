@@ -1,6 +1,6 @@
-<!-- edomias_operation/views/purchase_views.xml -->
-
+<!-- edomias_operations/views/purchase_views.xml -->
 <odoo>
+    <!-- Tree View for Purchases -->
     <record id="view_purchase_tree" model="ir.ui.view">
         <field name="name">purchase.tree</field>
         <field name="model">my_module.purchase</field>
@@ -9,10 +9,13 @@
                 <field name="project_id"/>
                 <field name="requisition"/>
                 <field name="goods_available"/>
+                <field name="purchase_requisition_id"/>
+                <field name="purchase_order_id"/>
             </tree>
         </field>
     </record>
 
+    <!-- Form View for Purchases -->
     <record id="view_purchase_form" model="ir.ui.view">
         <field name="name">purchase.form</field>
         <field name="model">my_module.purchase</field>
@@ -34,6 +37,106 @@
         </field>
     </record>
 
-    <menuitem id="menu_purchase_root" name="Purchases" sequence="4"/>
-    <menuitem id="menu_purchase" name="Purchases" parent="menu_purchase_root" action="action_purchase"/>
+    <!-- Tree View for Purchase Requisitions -->
+    <record id="view_purchase_requisition_tree" model="ir.ui.view">
+        <field name="name">purchase.requisition.tree</field>
+        <field name="model">my_module.purchase_requisition</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="project_id"/>
+                <field name="requisition"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Purchase Requisitions -->
+    <record id="view_purchase_requisition_form" model="ir.ui.view">
+        <field name="name">purchase.requisition.form</field>
+        <field name="model">my_module.purchase_requisition</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="project_id"/>
+                        <field name="requisition"/>
+                        <field name="state"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Purchase Orders -->
+    <record id="view_purchase_order_tree" model="ir.ui.view">
+        <field name="name">purchase.order.tree</field>
+        <field name="model">my_module.purchase_order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="project_id"/>
+                <field name="vat_returnable"/>
+                <field name="non_vat_returnable"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Purchase Orders -->
+    <record id="view_purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">my_module.purchase_order</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="project_id"/>
+                        <field name="vat_returnable"/>
+                        <field name="non_vat_returnable"/>
+                        <field name="state"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to Open Purchase Views -->
+    <record id="action_purchase" model="ir.actions.act_window">
+        <field name="name">Purchases</field>
+        <field name="res_model">my_module.purchase</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Purchase entry
+            </p>
+        </field>
+    </record>
+
+    <!-- Action to Open Purchase Requisition Views -->
+    <record id="action_purchase_requisition" model="ir.actions.act_window">
+        <field name="name">Purchase Requisitions</field>
+        <field name="res_model">my_module.purchase_requisition</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Purchase Requisition entry
+            </p>
+        </field>
+    </record>
+
+    <!-- Action to Open Purchase Order Views -->
+    <record id="action_purchase_order" model="ir.actions.act_window">
+        <field name="name">Purchase Orders</field>
+        <field name="res_model">my_module.purchase_order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Purchase Order entry
+            </p>
+        </field>
+    </record>
+
+    
 </odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Root Menu for Edomias Operation Management -->
+    <menuitem id="menu_edomias_operation_root" name="Edomias Operation" sequence="10" />
+
+    <!-- Client Management -->
+    <menuitem id="menu_client_management" parent="menu_edomias_operation_root" name="Clients" sequence="10" action="action_client"/>
+
+    <!-- Project Management -->
+    <menuitem id="menu_project_management" parent="menu_edomias_operation_root" name="Projects" sequence="20" action="action_project"/>
+
+    <!-- Payroll Management -->
+    <menuitem id="menu_payroll_management" parent="menu_edomias_operation_root" name="Payroll" sequence="30" action="action_payroll"/>
+
+    <!-- Purchase Management -->
+ <menuitem id="menu_purchase_management"  parent="menu_edomias_operation_root"
+              name="Purchases" sequence="1"/>
+    <menuitem id="menu_purchase" name="Purchase Entries" parent="menu_purchase_management" action="action_purchase"/>
+    <menuitem id="menu_purchase_requisition" name="Purchase Requisitions" parent="menu_purchase_management" action="action_purchase_requisition"/>
+    <menuitem id="menu_purchase_order" name="Purchase Orders" parent="menu_purchase_management" action="action_purchase_order"/>
+
+    <!-- Sales Management -->
+    <menuitem id="menu_sales_management" parent="menu_edomias_operation_root" name="Sales" sequence="50" action="action_sales_order"/>
+
+
+</odoo>

@@ -1,19 +1,17 @@
 <odoo>
-    <!-- Main Menu for Edomias Projects -->
-    <menuitem id="menu_edomias_root" name="Edomias Projects" sequence="10"/>
+<!--    <menuitem id="menu_edomias_root" name="Edomias Project" sequence="1"/>-->
 
-    <!-- Submenu for Addis Ababa -->
-    <menuitem id="menu_edomias_addis_ababa" name="Addis Ababa" parent="menu_edomias_root" action="action_edomias_location_addis_ababa"/>
+<!--    <menuitem id="menu_edomias_location" name="Locations" parent="menu_edomias_root" sequence="1"/>-->
 
-    <!-- Submenu for Bahirdar -->
-    <menuitem id="menu_edomias_bahirdar" name="Bahirdar" parent="menu_edomias_root" action="action_edomias_location_bahirdar"/>
+<!--    <menuitem id="menu_edomias_location_addis_ababa" name="Addis Ababa" parent="menu_edomias_location" sequence="1" action="action_edomias_location_addis_ababa"/>-->
+<!--    <menuitem id="menu_edomias_location_bahirdar" name="Bahirdar" parent="menu_edomias_location" sequence="2" action="action_edomias_location_bahirdar"/>-->
+<!--    <menuitem id="menu_edomias_location_adama" name="Adama" parent="menu_edomias_location" sequence="3" action="action_edomias_location_adama"/>-->
+<!--    <menuitem id="menu_edomias_location_hawasa" name="Hawasa" parent="menu_edomias_location" sequence="4" action="action_edomias_location_hawasa"/>-->
+<!--    <menuitem id="menu_edomias_location_jima" name="Jima" parent="menu_edomias_location" sequence="5" action="action_edomias_location_jima"/>-->
+<!-- Menu Items -->
 
-    <!-- Submenu for Adama -->
-    <menuitem id="menu_edomias_adama" name="Adama" parent="menu_edomias_root" action="action_edomias_location_adama"/>
 
-    <!-- Submenu for Hawasa -->
-    <menuitem id="menu_edomias_hawasa" name="Hawasa" parent="menu_edomias_root" action="action_edomias_location_hawasa"/>
+<!--    <menuitem id="menu_edomias_project" name="Projects" parent="menu_edomias_root" sequence="1" action="action_edomias_project"/>-->
 
-    <!-- Submenu for Jima -->
-    <menuitem id="menu_edomias_jima" name="Jima" parent="menu_edomias_root" action="action_edomias_location_jima"/>
+
 </odoo>

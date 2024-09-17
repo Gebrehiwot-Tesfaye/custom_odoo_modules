@@ -1,40 +1,75 @@
 <odoo>
-
-     <record id="view_edomias_location_tree" model="ir.ui.view">
+    <!-- Tree View -->
+     <!-- Tree View -->
+    <record id="view_edomias_location_tree" model="ir.ui.view">
         <field name="name">edomias.location.tree</field>
         <field name="model">edomias.location</field>
         <field name="arch" type="xml">
-            <tree string="Edomias Locations">
+            <tree>
                 <field name="name"/>
                 <field name="position"/>
                 <field name="employment_rate"/>
                 <field name="edomias_rate"/>
+                <field name="total_rate"/>
+                <field name="project_id"/>
             </tree>
         </field>
     </record>
 
+    <!-- Form View -->
     <record id="view_edomias_location_form" model="ir.ui.view">
         <field name="name">edomias.location.form</field>
         <field name="model">edomias.location</field>
         <field name="arch" type="xml">
-            <form string="Edomias Location">
+            <form>
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="position"/>
                         <field name="employment_rate"/>
                         <field name="edomias_rate"/>
+                        <field name="total_rate" readonly="1"/>
+                        <field name="project_id"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
+
+    <!-- Kanban View -->
+    <record id="view_edomias_location_kanban" model="ir.ui.view">
+        <field name="name">edomias.location.kanban</field>
+        <field name="model">edomias.location</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <strong><field name="name"/></strong>
+                            <div>Position: <field name="position"/></div>
+                            <div>Employment Rate: <field name="employment_rate"/></div>
+                            <div>Edomias Rate: <field name="edomias_rate"/></div>
+                            <div>Total Rate: <field name="total_rate"/></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- Actions -->
     <!-- Action for Addis Ababa -->
     <record id="action_edomias_location_addis_ababa" model="ir.actions.act_window">
         <field name="name">Addis Ababa Locations</field>
         <field name="res_model">edomias.location</field>
         <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{'default_name': 'addis_ababa'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage locations in Addis Ababa
+            </p>
+        </field>
         <field name="domain">[('name', '=', 'addis_ababa')]</field>
+        <field name="view_id" ref="view_edomias_location_tree"/>
     </record>
 
     <!-- Action for Bahirdar -->
@@ -42,28 +77,58 @@
         <field name="name">Bahirdar Locations</field>
         <field name="res_model">edomias.location</field>
         <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{'default_name': 'bahirdar'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage locations in Bahirdar
+            </p>
+        </field>
         <field name="domain">[('name', '=', 'bahirdar')]</field>
+        <field name="view_id" ref="view_edomias_location_tree"/>
     </record>
 
-    <!-- Similar actions for Adama, Hawasa, and Jima -->
+    <!-- Action for Adama -->
     <record id="action_edomias_location_adama" model="ir.actions.act_window">
         <field name="name">Adama Locations</field>
         <field name="res_model">edomias.location</field>
         <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{'default_name': 'adama'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage locations in Adama
+            </p>
+        </field>
         <field name="domain">[('name', '=', 'adama')]</field>
+        <field name="view_id" ref="view_edomias_location_tree"/>
     </record>
 
+    <!-- Action for Hawasa -->
     <record id="action_edomias_location_hawasa" model="ir.actions.act_window">
         <field name="name">Hawasa Locations</field>
         <field name="res_model">edomias.location</field>
         <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{'default_name': 'hawasa'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage locations in Hawasa
+            </p>
+        </field>
         <field name="domain">[('name', '=', 'hawasa')]</field>
+        <field name="view_id" ref="view_edomias_location_tree"/>
     </record>
 
+    <!-- Action for Jima -->
     <record id="action_edomias_location_jima" model="ir.actions.act_window">
         <field name="name">Jima Locations</field>
         <field name="res_model">edomias.location</field>
         <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{'default_name': 'jima'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage locations in Jima
+            </p>
+        </field>
         <field name="domain">[('name', '=', 'jima')]</field>
+        <field name="view_id" ref="view_edomias_location_tree"/>
     </record>
 </odoo>

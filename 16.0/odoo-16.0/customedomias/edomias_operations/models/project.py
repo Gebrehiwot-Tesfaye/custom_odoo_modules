@@ -31,12 +31,15 @@ class Project(models.Model):
     income_tax_center = fields.Char(string="Income Tax Center")
     contract_notification_date = fields.Date(string="Contract Notification Date")
 
-    @api.model
-    def create(self, vals):
-        # Send email notification when a new project is created
-        res = super(Project, self).create(vals)
-        self.env.ref('my_module.new_project_email_template').send_mail(res.id)
-        return res
+
+
+    # @api.model
+    # def create(self, vals):
+    #     res = super(Project, self).create(vals)
+    #     template = self.env.ref('my_module.new_project_email_template')
+    #     if template:
+    #         template.send_mail(res.id)
+    #     return res
 
     @api.model
     def check_contract_end_dates(self):

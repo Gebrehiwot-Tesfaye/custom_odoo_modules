@@ -30,7 +30,22 @@
             </form>
         </field>
     </record>
+    <odoo>
+    <!-- Action to Open Payroll Views -->
+    <record id="action_payroll" model="ir.actions.act_window">
+        <field name="name">Payroll</field>
+        <field name="res_model">my_module.payroll</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Payroll entry
+            </p>
+        </field>
+    </record>
+</odoo>
 
-    <menuitem id="menu_payroll_root" name="Payroll" sequence="3"/>
-    <menuitem id="menu_payroll" name="Payroll" parent="menu_payroll_root" action="action_payroll"/>
+
+<!--    <menuitem id="menu_payroll_root" name="Payroll" sequence="3"/>-->
+<!--    <menuitem id="menu_payroll" name="Payroll" parent="menu_payroll_root" action="action_payroll"/>-->
 </odoo>

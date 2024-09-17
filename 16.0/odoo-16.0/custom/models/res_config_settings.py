@@ -60,7 +60,7 @@ class ResConfigSettings(models.TransientModel):
     
     def action_reset_theme_assets(self):
         self.env['web_editor.assets'].reset_asset(
-            '/muk_web_theme/static/src/colors.scss', 'web._assets_primary_variables',
+            '/static/src/colors.scss', 'web._assets_primary_variables',
         )
         return {
             'type': 'ir.actions.client',
@@ -81,7 +81,7 @@ class ResConfigSettings(models.TransientModel):
             'mk-appbar-background',
         ]
         colors = self.env['web_editor.assets'].get_theme_variables_values(
-            '/muk_web_theme/static/src/colors.scss', 'web._assets_primary_variables', variables
+            '/static/src/colors.scss', 'web._assets_primary_variables', variables
         )
         colors_changed = []
         colors_changed.append(self.theme_color_brand != colors['o-brand-odoo'])
@@ -98,7 +98,7 @@ class ResConfigSettings(models.TransientModel):
                 {'name': 'mk-appbar-background', 'value': self.theme_color_appbar_background or "#000000"},
             ]
             self.env['web_editor.assets'].replace_theme_variables_values(
-                '/muk_web_theme/static/src/colors.scss', 'web._assets_primary_variables', variables
+                '/static/src/colors.scss', 'web._assets_primary_variables', variables
             )
         return res
 
@@ -113,7 +113,7 @@ class ResConfigSettings(models.TransientModel):
             'mk-appbar-background',
         ]
         colors = self.env['web_editor.assets'].get_theme_variables_values(
-            '/muk_web_theme/static/src/colors.scss', 'web._assets_primary_variables', variables
+            '/static/src/colors.scss', 'web._assets_primary_variables', variables
         )
         res.update({
             'theme_color_brand': colors['o-brand-odoo'],
