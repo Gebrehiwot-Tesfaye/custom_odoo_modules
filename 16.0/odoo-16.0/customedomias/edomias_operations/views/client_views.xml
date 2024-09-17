@@ -1,0 +1,31 @@
+<!-- edomias_operation/views/client_views.xml -->
+
+<odoo>
+    <record id="view_client_tree" model="ir.ui.view">
+        <field name="name">client.tree</field>
+        <field name="model">my_module.client</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_client_form" model="ir.ui.view">
+        <field name="name">client.form</field>
+        <field name="model">my_module.client</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="project_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_client_root" name="Clients" sequence="1"/>
+    <menuitem id="menu_client" name="Clients" parent="menu_client_root" action="action_client"/>
+</odoo>

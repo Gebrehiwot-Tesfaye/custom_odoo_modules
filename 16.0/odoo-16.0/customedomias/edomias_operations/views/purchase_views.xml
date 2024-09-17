@@ -1,0 +1,39 @@
+<!-- edomias_operation/views/purchase_views.xml -->
+
+<odoo>
+    <record id="view_purchase_tree" model="ir.ui.view">
+        <field name="name">purchase.tree</field>
+        <field name="model">my_module.purchase</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="project_id"/>
+                <field name="requisition"/>
+                <field name="goods_available"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_purchase_form" model="ir.ui.view">
+        <field name="name">purchase.form</field>
+        <field name="model">my_module.purchase</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="project_id"/>
+                        <field name="requisition"/>
+                        <field name="goods_available"/>
+                        <field name="purchase_requisition_id"/>
+                        <field name="comparison_report"/>
+                        <field name="purchase_order_id"/>
+                        <field name="vat_returnable"/>
+                        <field name="non_vat_returnable"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_purchase_root" name="Purchases" sequence="4"/>
+    <menuitem id="menu_purchase" name="Purchases" parent="menu_purchase_root" action="action_purchase"/>
+</odoo>

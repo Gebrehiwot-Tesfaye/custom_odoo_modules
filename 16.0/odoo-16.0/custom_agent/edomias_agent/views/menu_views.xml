@@ -1,0 +1,16 @@
+<odoo>
+    <!-- Main Menu for Edomias Agent -->
+    <menuitem id="menu_edomias_main" name="Edomias Agent" sequence="1"/>
+
+    <!-- Submenu for Projects -->
+    <menuitem id="menu_project" name="Projects" parent="menu_edomias_main" sequence="10" action="action_project"/>
+
+    <!-- Submenu for Locations -->
+<!--    <menuitem id="menu_location" name="Locations" parent="menu_edomias_main" sequence="3" action="action_location"/>-->
+
+<!--    &lt;!&ndash; Submenu for Positions &ndash;&gt;-->
+<!--    <menuitem id="menu_position" name="Positions" parent="menu_edomias_main" sequence="4" action="action_position"/>-->
+
+<!--    &lt;!&ndash; Submenu for Agents &ndash;&gt;-->
+<!--    <menuitem id="menu_agent" name="Agents" parent="menu_edomias_main" sequence="5" action="action_agent"/>-->
+</odoo>

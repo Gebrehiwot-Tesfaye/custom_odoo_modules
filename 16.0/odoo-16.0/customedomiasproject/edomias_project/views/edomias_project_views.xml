@@ -1,0 +1,56 @@
+<odoo>
+    <record id="view_edomias_project_tree" model="ir.ui.view">
+        <field name="name">edomias.project.tree</field>
+        <field name="model">edomias.project</field>
+        <field name="arch" type="xml">
+            <tree string="Edomias Projects">
+                <field name="name"/>
+                <field name="client_name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_edomias_project_form" model="ir.ui.view">
+        <field name="name">edomias.project.form</field>
+        <field name="model">edomias.project</field>
+        <field name="arch" type="xml">
+            <form string="Edomias Project">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="client_name"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                    <notebook>
+                        <page string="Locations">
+                            <field name="location_ids">
+                                <tree string="Locations">
+                                    <field name="name"/>
+                                    <field name="position"/>
+                                    <field name="employment_rate"/>
+                                    <field name="edomias_rate"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_edomias_project_kanban" model="ir.ui.view">
+        <field name="name">edomias.project.kanban</field>
+        <field name="model">edomias.project</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="client_name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </kanban>
+        </field>
+    </record>
+</odoo>

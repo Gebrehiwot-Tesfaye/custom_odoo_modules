@@ -1,0 +1,66 @@
+<odoo>
+    <!-- Tree view for Edomias Agents -->
+    <record id="view_agent_tree" model="ir.ui.view">
+        <field name="name">edomias.agent.tree</field>
+        <field name="model">edomias.agent</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="project_id"/>
+                <field name="location_id"/>
+                <field name="position_id"/>
+                <field name="edomias_rate"/>
+                <field name="employee_rate"/>
+                <field name="quantity"/>
+                <field name="total_edomias_rate"/>
+                <field name="total_employee_rate"/>
+                <field name="net_profit"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view for Edomias Agents -->
+    <record id="view_agent_form" model="ir.ui.view">
+        <field name="name">edomias.agent.form</field>
+        <field name="model">edomias.agent</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="project_id"/>
+                        <field name="location_id"/>
+                        <field name="position_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Rates">
+                            <group>
+                                <field name="edomias_rate"/>
+                                <field name="employee_rate"/>
+                                <field name="quantity"/>
+                            </group>
+                        </page>
+                        <page string="Total Rates">
+                            <group>
+                                <field name="total_edomias_rate" readonly="1"/>
+                                <field name="total_employee_rate" readonly="1"/>
+                                <field name="net_profit" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Edomias Agents -->
+    <record id="action_agent" model="ir.actions.act_window">
+        <field name="name">Edomias Agents</field>
+        <field name="res_model">edomias.agent</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{'search_default_order': 'create_date desc'}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new agent record.
+            </p>
+        </field>
+    </record>
+</odoo>

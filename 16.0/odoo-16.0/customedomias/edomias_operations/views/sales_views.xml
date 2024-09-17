@@ -1,0 +1,36 @@
+<!-- edomias_operation/views/sales_views.xml -->
+
+<odoo>
+    <record id="view_sales_order_tree" model="ir.ui.view">
+        <field name="name">sales.order.tree</field>
+        <field name="model">my_module.sales_order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="client_id"/>
+                <field name="project_id"/>
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sales_order_form" model="ir.ui.view">
+        <field name="name">sales.order.form</field>
+        <field name="model">my_module.sales_order</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="client_id"/>
+                        <field name="project_id"/>
+                        <field name="location"/>
+                        <field name="contract_info"/>
+                        <field name="service_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_sales_root" name="Sales" sequence="5"/>
+    <menuitem id="menu_sales_order" name="Sales Orders" parent="menu_sales_root" action="action_sales_order"/>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_edomias_agent,access.edomias.agent,model_edomias_agent,,1,1,1,1
+access_agent_project,access.agent.project,model_agent_project,,1,1,1,1
+access_agent_location,access.agent.location,model_agent_location,,1,1,1,1
+access_edomias_position,access.edomias.position,model_edomias_position,,1,1,1,1

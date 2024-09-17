@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_client,access_client,model_my_module_client,,1,1,1,1
+access_project,access_project,model_my_module_project,,1,1,1,1
+access_payroll,access_payroll,model_my_module_payroll,,1,1,1,1
+access_purchase,access_purchase,model_my_module_purchase,,1,1,1,1
+access_sales_order,access_sales_order,model_my_module_sales_order,,1,1,1,1

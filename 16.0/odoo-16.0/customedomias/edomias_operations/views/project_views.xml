@@ -1,0 +1,46 @@
+<!-- edomias_operation/views/project_views.xml -->
+
+<odoo>
+    <record id="view_project_tree" model="ir.ui.view">
+        <field name="name">project.tree</field>
+        <field name="model">my_module.project</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="contract_start_date"/>
+                <field name="contract_end_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_project_form" model="ir.ui.view">
+        <field name="name">project.form</field>
+        <field name="model">my_module.project</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="client_id"/>
+                        <field name="contract_start_date"/>
+                        <field name="contract_end_date"/>
+                        <field name="modality"/>
+                        <field name="num_manpower"/>
+                        <field name="region"/>
+                        <field name="location"/>
+                        <field name="admin_cost"/>
+                        <field name="fixed_rate_costs"/>
+                        <field name="profit_margin_percentage"/>
+                        <field name="type"/>
+                        <field name="employee_rate_ids"/>
+                        <field name="edomias_rate_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_project_root" name="Projects" sequence="2"/>
+    <menuitem id="menu_project" name="Projects" parent="menu_project_root" action="action_project"/>
+</odoo>

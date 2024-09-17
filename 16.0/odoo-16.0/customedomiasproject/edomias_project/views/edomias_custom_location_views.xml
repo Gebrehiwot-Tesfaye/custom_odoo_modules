@@ -1,0 +1,31 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_edomias_custom_location_tree" model="ir.ui.view">
+        <field name="name">edomias.custom.location.tree</field>
+        <field name="model">custom.location</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="custom_name"/>
+                <field name="edomias_location_id"/>
+                <field name="specific_rate"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_edomias_custom_location_form" model="ir.ui.view">
+        <field name="name">edomias.custom.location.form</field>
+        <field name="model">custom.location</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="custom_name"/>
+                        <field name="edomias_location_id" string="Related Edomias Location"/>
+                        <field name="specific_rate"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

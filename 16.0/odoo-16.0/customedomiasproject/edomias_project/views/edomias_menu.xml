@@ -1,0 +1,19 @@
+<odoo>
+    <!-- Main Menu for Edomias Projects -->
+    <menuitem id="menu_edomias_root" name="Edomias Projects" sequence="10"/>
+
+    <!-- Submenu for Addis Ababa -->
+    <menuitem id="menu_edomias_addis_ababa" name="Addis Ababa" parent="menu_edomias_root" action="action_edomias_location_addis_ababa"/>
+
+    <!-- Submenu for Bahirdar -->
+    <menuitem id="menu_edomias_bahirdar" name="Bahirdar" parent="menu_edomias_root" action="action_edomias_location_bahirdar"/>
+
+    <!-- Submenu for Adama -->
+    <menuitem id="menu_edomias_adama" name="Adama" parent="menu_edomias_root" action="action_edomias_location_adama"/>
+
+    <!-- Submenu for Hawasa -->
+    <menuitem id="menu_edomias_hawasa" name="Hawasa" parent="menu_edomias_root" action="action_edomias_location_hawasa"/>
+
+    <!-- Submenu for Jima -->
+    <menuitem id="menu_edomias_jima" name="Jima" parent="menu_edomias_root" action="action_edomias_location_jima"/>
+</odoo>
