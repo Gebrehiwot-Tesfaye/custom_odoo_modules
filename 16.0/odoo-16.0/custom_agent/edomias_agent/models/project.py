@@ -6,23 +6,48 @@ from odoo import models, fields, api
 from datetime import timedelta, date
 
 _logger = logging.getLogger(__name__)
+from odoo import models, fields, api
+
 class EdomiasProject(models.Model):
     _name = 'agent.project'
     _description = 'Edomias Project'
     _order = 'create_date desc'
 
     name = fields.Char(string='Project Name', required=True)
+
     description = fields.Text(string='Project Description')
+    client = fields.Char(string='Client')
     start_date = fields.Date(string='Start Date')
     end_date = fields.Date(string='End Date')
+
+    # New Fields
+
+    modality = fields.Selection([
+        ('piece_rate', 'Piece Rate'),
+        ('whole', 'Whole'),
+        ('defined_manpower', 'Defined Man Power'),
+        # Add more modalities as needed
+    ], string='Modality')
+    renewal_date = fields.Date(string='Renewal Date')
+    admin_cost = fields.Float(string='Administration Cost', required=False)
+    agreement = fields.Binary(string='Agreement', attachment=True)
+    is_cost_plus = fields.Boolean(string='Is Cost Plus')
+    profit_margin_percentage = fields.Float(string='Profit Margin Percentage', required=False)
+
+
+
     create_date = fields.Datetime(string="Created Date", readonly=True, default=fields.Datetime.now)
 
     # Fields to select multiple locations and positions
     location_ids = fields.Many2many('agent.location', string='Locations', required=True)
-    position_ids = fields.Many2many('edomias.position', string='Positions', required=True)
+    job_ids = fields.Many2one('hr.job', ondelete='cascade', string='Job Position', required=True)
+
+    # position_ids = fields.Many2many('edomias.position', string='Positions', required=True)
 
     # One2many relation to hold Edomias agents
     agent_ids = fields.One2many('edomias.agent', 'project_id', string='Agents', copy=False)
+
+
 
     @api.constrains('name', 'start_date', 'end_date')
     def _check_unique_name_and_dates(self):
@@ -35,8 +60,8 @@ class EdomiasProject(models.Model):
                 raise ValidationError('The project name must be unique. Please choose a different name.')
 
             # Check if the start date is in the past
-            if record.start_date and record.start_date < today:
-                raise ValidationError("The start date cannot be in the past. Please select a valid date.")
+            # if record.start_date and record.start_date < today:
+            #     raise ValidationError("The start date cannot be in the past. Please select a valid date.")
 
             # Check if the end date is in the past
             if record.end_date and record.end_date < today:
@@ -47,20 +72,19 @@ class EdomiasProject(models.Model):
                 raise ValidationError(
                     "The end date cannot be earlier than the start date. Please select a valid end date.")
 
-    @api.onchange('location_ids', 'position_ids')
+    @api.onchange('location_ids', 'job_ids')
     def _onchange_location_position(self):
         """ Automatically add agents when locations or positions are selected """
-        # Clear the current agents list to avoid duplication
         agents = []
 
-        # For every combination of location and position, create a new agent entry
         for location in self.location_ids:
-            for position in self.position_ids:
+            # job_ids is a Many2one field, so you can't loop through it; just reference its id
+            if self.job_ids:
                 # Check if the agent already exists in the list
-                if not any(agent.location_id == location and agent.position_id == position for agent in self.agent_ids):
+                if not any(agent.location_id == location and agent.job_id == self.job_ids for agent in self.agent_ids):
                     agents.append((0, 0, {
                         'location_id': location.id,
-                        'position_id': position.id,
+                        'job_id': self.job_ids.id,
                     }))
 
         # Assign the new agents list to the agent_ids field
@@ -111,3 +135,9 @@ class EdomiasProject(models.Model):
             _logger.info('End date notification sent for project: %s', project.name)
         except Exception as e:
             _logger.error('Error sending end date email: %s', e)
+
+    @api.model
+    def toggle_column_options(self):
+        # Logic to handle the toggling of column options in the view
+        # This is a placeholder; implement the logic based on your needs
+        pass

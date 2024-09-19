@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields,api
 
 class EdomiasLocation(models.Model):
     _name = 'agent.location'
@@ -8,3 +8,16 @@ class EdomiasLocation(models.Model):
     description = fields.Text(string='Location Description')
     create_date = fields.Datetime(string="Created Date", readonly=True, default=fields.Datetime.now)
     # Add other common fields for location
+
+    # Foreign key to TaxRegion
+    income_tax_region_id = fields.Many2one('tax.region', string='Income Tax Region')
+    tension_tax_region_id = fields.Many2one('tax.region', string='Tension Tax Region')
+
+    @api.onchange('income_tax_region_id')
+    def _onchange_income_tax_region(self):
+        if self.income_tax_region_id:
+            # Set tension tax region to the same value by default
+            if not self.tension_tax_region_id:
+                self.tension_tax_region_id = self.income_tax_region_id
+
+

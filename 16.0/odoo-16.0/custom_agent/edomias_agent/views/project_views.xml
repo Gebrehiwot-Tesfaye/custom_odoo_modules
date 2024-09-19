@@ -4,13 +4,17 @@
         <field name="name">agent.project.tree</field>
         <field name="model">agent.project</field>
         <field name="arch" type="xml">
-            <tree>
+           <tree>
+                <field name="client"/>
                 <field name="name"/>
                 <field name="description"/>
-                <field name="agent_ids" string="Agents"/> <!-- Display the count of agents -->
-                 <field name="start_date" widget="date"/>
-                <field name="end_date" widget="date"/>
+               <field name="modality"/>
 
+                <field name="admin_cost" optional="show"/>
+                <field name="renewal_date"/>
+                <field name="is_cost_plus" optional="show"/>
+                <field name="start_date" widget="date" optional="show"/>
+                <field name="end_date" widget="date" optional="show" />
             </tree>
         </field>
     </record>
@@ -24,39 +28,60 @@
             <sheet>
                 <group>
                     <group>
+                         <field name="client"/>
                         <field name="name" required="1"/>
                         <field name="description"/>
-
-                    </group>
-                    <group>
-                    <field name="start_date"/>
+                          <field name="start_date"/>
                         <field name="end_date"/>
-<!--                        <field name="location_ids" widget="many2many_tags"/>-->
-<!--                        <field name="position_ids" widget="many2many_tags"/>-->
-                    </group>
-                </group>
-                <notebook>
-                    <!-- Tree view for Edomias Agents -->
-                    <page string="Edomias Agents">
-                        <field name="agent_ids" widget="many2many_list">
-                            <tree editable="bottom">
-                                <field name="location_id"  /> <!-- Show locations here -->
-                                <field name="position_id" />
 
-                                <field name="edomias_rate" required="1"/>
-                                <field name="employee_rate" required="1"/>
-                                <field name="quantity"/>
-                                <field name="total_edomias_rate"/>
-                                <field name="total_employee_rate"/>
-                                <field name="net_profit"/>
-                            </tree>
-                        </field>
-                    </page>
-                </notebook>
+
+                    </group>
+
+                    <group>
+                            <field name="modality"/>
+
+                            <field name="renewal_date"/>
+                            <field name="admin_cost"/>
+                            <field name="agreement"/>
+                            <field name="is_cost_plus"/>
+                            <field name="profit_margin_percentage" attrs="{'invisible': [('is_cost_plus', '=', False)]}"/>
+                        </group>
+                </group>
+             <notebook>
+    <!-- Tree view for Edomias Agents -->
+    <page string="Edomias Agents">
+        <field name="agent_ids" widget="many2many_list">
+            <tree editable="bottom">
+
+                <!-- These fields will be shown by default -->
+                <field name="location_id" string="Location"/>
+                <field name="job_id" string="Job Position"/>
+                <field name="edomias_rate" required="1" string="Edomias Rate"/>
+                <field name="employee_rate" required="1" string="Employee Rate"/>
+                <field name="Number_of_Man_Power" string="Number of Man Power"/>
+
+                <!-- These fields will be hidden by default and selectable via the dropdown -->
+                <field name="total_edomias_rate" string="Total Edomias Rate" optional="show"/>
+                <field name="total_employee_rate" string="Total Employee Rate" optional="show"/>
+
+                <!-- Optional Allowance fields -->
+                <field name="hra" string="HRA (Housing Rent Allowance)" optional="show"/>
+                <field name="da" string="DA (Dearness Allowance)" optional="show"/>
+                <field name="travel_allowance" string="Travel Allowance" optional="show"/>
+                <field name="meal_allowance" string="Meal Allowance" optional="show"/>
+                <field name="medical_allowance" string="Medical Allowance" optional="show"/>
+                <field name="other_allowance" string="Other Allowance" optional="show"/>
+
+            </tree>
+        </field>
+    </page>
+</notebook>
+
             </sheet>
         </form>
     </field>
 </record>
+
 
  <record id="view_project_kanban" model="ir.ui.view">
     <field name="name">agent.project.kanban</field>
@@ -121,16 +146,16 @@
     </record>
 
     <!-- Kanban view for Positions -->
-    <record id="view_position_kanban" model="ir.ui.view">
-        <field name="name">edomias.position.kanban</field>
-        <field name="model">edomias.position</field>
-        <field name="arch" type="xml">
-            <kanban>
-                <field name="name"/>
-                <field name="description"/>
-            </kanban>
-        </field>
-    </record>
+<!--    <record id="view_position_kanban" model="ir.ui.view">-->
+<!--        <field name="name">edomias.position.kanban</field>-->
+<!--        <field name="model">edomias.position</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <kanban>-->
+<!--                <field name="name"/>-->
+<!--                <field name="description"/>-->
+<!--            </kanban>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!-- Kanban view for Agents -->
     <record id="view_agent_kanban" model="ir.ui.view">
@@ -140,13 +165,13 @@
             <kanban>
                 <field name="project_id"/>
                 <field name="location_id"/>
-                <field name="position_id"/>
+                <field name="job_id"/>
                 <field name="edomias_rate"/>
                 <field name="employee_rate"/>
-                <field name="quantity"/>
+                <field name="Number_of_Man_Power"/>
                 <field name="total_edomias_rate"/>
                 <field name="total_employee_rate"/>
-                <field name="net_profit"/>
+
             </kanban>
         </field>
     </record>
@@ -157,7 +182,7 @@
         <field name="name">Locations</field>
         <field name="res_model">agent.location</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="view_id" ref="view_location_tree"/>
+<!--        <field name="view_id" ref="view_location_tree"/>-->
         <field name="context">{'search_default_order': 'create_date desc'}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
@@ -166,26 +191,26 @@
         </field>
     </record>
 
-    <!-- Action for Positions -->
-    <record id="action_position" model="ir.actions.act_window">
-        <field name="name">Positions</field>
-        <field name="res_model">edomias.position</field>
-        <field name="view_mode">tree,form,kanban</field>
-        <field name="view_id" ref="view_position_tree"/>
-        <field name="context">{'search_default_order': 'create_date desc'}</field>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                Click to create a new position.
-            </p>
-        </field>
-    </record>
+<!--    &lt;!&ndash; Action for Positions &ndash;&gt;-->
+<!--    <record id="action_position" model="ir.actions.act_window">-->
+<!--        <field name="name">Positions</field>-->
+<!--        <field name="res_model">edomias.position</field>-->
+<!--        <field name="view_mode">tree,form,kanban</field>-->
+<!--&lt;!&ndash;        <field name="view_id" ref="view_position_tree"/>&ndash;&gt;-->
+<!--        <field name="context">{'search_default_order': 'create_date desc'}</field>-->
+<!--        <field name="help" type="html">-->
+<!--            <p class="oe_view_nocontent_create">-->
+<!--                Click to create a new position.-->
+<!--            </p>-->
+<!--        </field>-->
+<!--    </record>-->
 
        <!-- Action for Agents -->
     <record id="action_agent" model="ir.actions.act_window">
         <field name="name">Edomias Agents</field>
         <field name="res_model">edomias.agent</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="view_id" ref="view_agent_tree"/>
+<!--        <field name="view_id" ref="view_agent_tree"/>-->
         <field name="context">{'search_default_order': 'create_date desc'}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
