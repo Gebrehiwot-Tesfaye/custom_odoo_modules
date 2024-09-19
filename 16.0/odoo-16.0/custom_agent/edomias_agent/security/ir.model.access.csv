@@ -7,4 +7,7 @@ access_tax_region_manager,tax.region.manager,model_tax_region,base.group_user,1,
 access_tax_region_user,tax.region.user,model_tax_region,base.group_user,1,1,1,1
 access_project_user,agent.project.user,model_agent_project,base.group_user,1,1,1,1
 
+ccess_agent_project_renewal_user,agent.project.renewal.user,model_agent_project_renewal,base.group_user,1,1,1,1
+access_agent_project_renewal_manager,agent.project.renewal.manager,model_agent_project_renewal,base.group_erp_manager,1,1,1,1
+
 

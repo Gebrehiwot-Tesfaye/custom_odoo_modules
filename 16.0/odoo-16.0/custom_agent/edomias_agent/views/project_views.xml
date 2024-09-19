@@ -25,6 +25,16 @@
     <field name="model">agent.project</field>
     <field name="arch" type="xml">
         <form>
+     <header>
+                    <!-- Button to open the form view for creating a new renewal -->
+                    <button name="%(action_renewal_form_modal)d" string="New Renewal" type="action" class="btn-primary" icon="fa-calendar"/>
+
+                    <!-- Button to open the tree view of existing renewals -->
+                    <button name="%(action_renewal_tree_modal)d" string="Renewal List" type="action" class="btn-secondary" icon="fa-list">
+                        <field name="renewal_count" widget="statinfo" string="Renewals"/>
+                    </button>
+                </header>
+
             <sheet>
                 <group>
                     <group>
@@ -52,26 +62,20 @@
     <page string="Edomias Agents">
         <field name="agent_ids" widget="many2many_list">
             <tree editable="bottom">
-
                 <!-- These fields will be shown by default -->
-                <field name="location_id" string="Location"/>
-                <field name="job_id" string="Job Position"/>
-                <field name="edomias_rate" required="1" string="Edomias Rate"/>
-                <field name="employee_rate" required="1" string="Employee Rate"/>
-                <field name="Number_of_Man_Power" string="Number of Man Power"/>
-
-                <!-- These fields will be hidden by default and selectable via the dropdown -->
-                <field name="total_edomias_rate" string="Total Edomias Rate" optional="show"/>
-                <field name="total_employee_rate" string="Total Employee Rate" optional="show"/>
+                <field name="location_id" string="Location" width="150"/>
+                <field name="job_id" string="Job Position" width="150"/>
+                <field name="edomias_rate" required="1" string="Edomias Rate" width="150"/>
+                <field name="employee_rate" required="1" string="Employee Rate" width="150"/>
+                <field name="Number_of_Man_Power" string="Number of Man Power" width="150"/>
 
                 <!-- Optional Allowance fields -->
-                <field name="hra" string="HRA (Housing Rent Allowance)" optional="show"/>
-                <field name="da" string="DA (Dearness Allowance)" optional="show"/>
-                <field name="travel_allowance" string="Travel Allowance" optional="show"/>
-                <field name="meal_allowance" string="Meal Allowance" optional="show"/>
-                <field name="medical_allowance" string="Medical Allowance" optional="show"/>
-                <field name="other_allowance" string="Other Allowance" optional="show"/>
-
+                <field name="hra" string="HRA (Housing Rent Allowance)" optional="show" width="150"/>
+                <field name="da" string="DA (Dearness Allowance)" optional="show" width="100"/>
+                <field name="travel_allowance" string="Travel Allowance" optional="show" width="100"/>
+                <field name="meal_allowance" string="Meal Allowance" optional="show" width="100"/>
+                <field name="medical_allowance" string="Medical Allowance" optional="show" width="100"/>
+                <field name="other_allowance" string="Other Allowance" optional="show" width="100"/>
             </tree>
         </field>
     </page>

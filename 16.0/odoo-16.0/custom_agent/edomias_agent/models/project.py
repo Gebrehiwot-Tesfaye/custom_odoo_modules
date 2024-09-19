@@ -46,9 +46,27 @@ class EdomiasProject(models.Model):
 
     # One2many relation to hold Edomias agents
     agent_ids = fields.One2many('edomias.agent', 'project_id', string='Agents', copy=False)
+    renewal_ids = fields.One2many('agent.project.renewal', 'project_id', string='Renewals')
 
+    # Renewal smart button count
+    # Add a computed field for the number of renewals
+    renewal_count = fields.Integer(
+        string='Number of Renewals',
+        compute='_compute_renewal_count',
+        store=True
+    )
 
+    @api.depends('renewal_ids')
+    def _compute_renewal_count(self):
+        for project in self:
+            project.renewal_count = len(project.renewal_ids)
 
+    # Add a One2many field to link renewals
+    renewal_ids = fields.One2many(
+        'agent.project.renewal',
+        'project_id',
+        string='Renewals'
+    )
     @api.constrains('name', 'start_date', 'end_date')
     def _check_unique_name_and_dates(self):
         today = date.today()

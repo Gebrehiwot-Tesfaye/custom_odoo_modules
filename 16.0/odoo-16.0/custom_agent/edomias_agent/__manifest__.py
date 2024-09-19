@@ -3,19 +3,21 @@
     'version': '1.0',
     'category': 'Human Resources',
     'summary': 'Employee management system for Edomias Agent',
-    'depends': ['base','hr_contract','hr'],
+    'depends': ['base','hr_contract','hr','purchase','mail'],
     'data': [
         'security/ir.model.access.csv',
         'views/project_views.xml',
         'views/location_views.xml',
-        # 'views/position_views.xml',
+
         'views/edomias_views.xml',
         'views/menu_views.xml',
-         # 'views/hr_employee_contract_views.xml',
+
         'data/email_templates.xml',  # Include the email templates
         'data/cron_jobs.xml',
         'views/assets.xml',
         'views/hr_contract_views.xml',
+        'views/agent_project_renewal_views.xml',
+        'views/purchase_order_views.xml',
     ],
 
 'assets': {
